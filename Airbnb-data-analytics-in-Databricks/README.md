@@ -69,6 +69,7 @@ The project uses the Airbnb Open Dataset containing:
 - Listing counts by neighborhood and room type
 - Average review rate by neighborhood
 
+![Dashboard Visualization](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/Airbnb-data-analytics-in-Databricks/images/05_dashboard.PNG)
 
 ## 🤝 Contributing
 Contributions are welcome! Please feel free to submit issues, fork the repository, and create pull requests for improvements in the following areas: 
