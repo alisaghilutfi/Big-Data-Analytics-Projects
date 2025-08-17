@@ -19,7 +19,7 @@ The project uses the Airbnb Open Dataset containing:
 
 ![Table 1: airbnb_listing](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/Airbnb-data-analytics-in-Databricks/images/01_airbnb_listing.PNG)
 
-![Table 2: airbnb_review](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/Airbnb-data-analytics-in-Databricks/images/01_airbnb_review.PNG)
+![Table 2: airbnb_review](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/Airbnb-data-analytics-in-Databricks/images/02_airbnb_review.PNG)
 
 ## Key Data Fields
 - `Listing Information:` listing_id, list_name, room_type, construction_year
