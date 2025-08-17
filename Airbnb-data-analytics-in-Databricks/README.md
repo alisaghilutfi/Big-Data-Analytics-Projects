@@ -17,6 +17,10 @@ The project uses the Airbnb Open Dataset containing:
 - `Performance metrics:` Reviews, availability, booking patterns
 - `Temporal data:` Construction year, review dates, availability calendar
 
+![Table 1: airbnb_listing](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/Airbnb-data-analytics-in-Databricks/images/01_airbnb_listing.PNG)
+
+![Table 2: airbnb_review](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/Airbnb-data-analytics-in-Databricks/images/02_airbnb_review.PNG)
+
 ## Key Data Fields
 - `Listing Information:` listing_id, list_name, room_type, construction_year
 - `Location Data:` neighborhood_group, neighborhood, lat, long, country
@@ -69,6 +73,7 @@ The project uses the Airbnb Open Dataset containing:
 - Listing counts by neighborhood and room type
 - Average review rate by neighborhood
 
+![Dashboard Visualization](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/Airbnb-data-analytics-in-Databricks/images/05_dashboard.PNG)
 
 ## 🤝 Contributing
 Contributions are welcome! Please feel free to submit issues, fork the repository, and create pull requests for improvements in the following areas: 
