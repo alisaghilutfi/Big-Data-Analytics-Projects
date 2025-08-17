@@ -1,0 +1,239 @@
+## Describing two tables (airbnb_listing, airbnb_review)
+
+DESCRIBE databricks_ws_e26125c1_af85_4abf_93de_4bfd0779d7ef.default.airbnb_listing;
+DESCRIBE databricks_ws_e26125c1_af85_4abf_93de_4bfd0779d7ef.default.airbnb_review;
+---------------------------------------------------------------------------------------------------------------------------------
+
+## Meging two tables to create the new table (airbnb_combined)
+
+CREATE OR REPLACE TABLE databricks_ws_ccc3f3d0_ea23_4743_b6b9_1c9b2a2c0063.default.airbnb_combined AS
+SELECT 
+    CAST(l.listing_id AS STRING) AS listing_id,
+    CAST(l.list_name AS STRING) AS list_name,
+    CAST(l.host_id AS STRING) AS host_id,
+    CAST(l.host_identity_verified AS STRING) AS host_identity_verified,
+    CAST(l.host_name AS STRING) AS host_name,
+    CAST(l.neighborhood_group AS STRING) AS neighborhood_group,
+    CAST(l.neighborhood AS STRING) AS neighborhood,
+    CAST(l.lat AS DOUBLE) AS lat, 
+    CAST(l.long AS DOUBLE) AS long,
+    CAST(l.country AS STRING) AS country,
+    CAST(l.country_code AS STRING) AS country_code,
+    CAST(l.instant_bookable AS STRING) AS instant_bookable,
+    CAST(l.cancellation_policy AS STRING) AS cancellation_policy,
+    CAST(l.room_type AS STRING) AS room_type,
+    CAST(l.construction_year AS INT) AS construction_year, 	
+    TRY_CAST(REGEXP_REPLACE(l.price, '\\$', '') AS DECIMAL(10,2)) AS price,
+    TRY_CAST(REGEXP_REPLACE(l.service_fee, '\\$', '') AS DECIMAL(10,2)) AS service_fee, 
+    CAST(l.minimum_nights AS INT) AS minimum_nights,
+    CAST(l.number_of_reviews AS INT) AS number_of_reviews,
+    CASE 
+        WHEN r.last_review IS NULL THEN NULL
+        ELSE TO_DATE(r.last_review, 'd/M/yyyy')
+    END AS last_review_date,
+    CAST(r.reviews_per_month AS DECIMAL(10,2)) AS reviews_per_month, 
+    CAST(r.review_rate_number AS DECIMAL(10,2)) AS review_rate_number, 
+    CAST(r.calculated_host_listings_count AS INT) AS calculated_host_listings_count, 
+    CAST(r.availability_365 AS INT) AS availability_365 
+FROM 
+    databricks_ws_ccc3f3d0_ea23_4743_b6b9_1c9b2a2c0063.default.airbnb_listing l
+JOIN 
+    databricks_ws_ccc3f3d0_ea23_4743_b6b9_1c9b2a2c0063.default.airbnb_review r
+ON 
+    l.listing_id = r.listing_id;
+---------------------------------------------------------------------------------------------------------------------------------
+
+## Checking about duplicates in listing_id column
+
+SELECT listing_id, 
+       COUNT(*) AS duplicate_listing_id
+FROM databricks_ws_ccc3f3d0_ea23_4743_b6b9_1c9b2a2c0063.default.airbnb_combined
+GROUP BY listing_id
+HAVING COUNT(*) > 1;
+---------------------------------------------------------------------------------------------------------------------------------
+
+## Handling the inconsistency in neighborhood_group column
+
+CREATE OR REPLACE TABLE databricks_ws_ccc3f3d0_ea23_4743_b6b9_1c9b2a2c0063.default.airbnb_combined AS
+SELECT
+  *,
+  CASE
+    WHEN LOWER(neighborhood_group)='manhattan' OR LOWER(neighborhood_group)='manhatan' THEN 'Manhattan'
+    WHEN LOWER(neighborhood_group)='brooklyn' OR LOWER(neighborhood_group)='brookln' THEN 'Brooklyn'
+    WHEN LOWER(neighborhood_group)='queens' THEN 'Queens'
+    WHEN LOWER(neighborhood_group)='staten island' THEN 'Staten Island'
+    WHEN LOWER(neighborhood_group)='bronx' THEN 'Bronx'
+    ELSE NULL
+  END AS standardized_neighborhood_group
+FROM databricks_ws_ccc3f3d0_ea23_4743_b6b9_1c9b2a2c0063.default.airbnb_combined;
+---------------------------------------------------------------------------------------------------------------------------------
+
+## Finding NULL values across important columns!
+
+SELECT
+  *,
+  COUNT(CASE WHEN listing_id IS NULL THEN 1 ELSE NULL END) AS null_listing_id,
+  COUNT(CASE WHEN host_id IS NULL THEN 1 ELSE NULL END) AS null_host_id,
+  COUNT(CASE WHEN neighborhood IS NULL THEN 1 ELSE NULL END) AS null_neighborhood,
+  COUNT(CASE WHEN neighborhood_group IS NULL THEN 1 ELSE NULL END) AS null_neighborhood_group,
+  COUNT(CASE WHEN price IS NULL THEN 1 ELSE NULL END) AS null_price
+FROM 
+   databricks_ws_ccc3f3d0_ea23_4743_b6b9_1c9b2a2c0063.default.airbnb_combined;
+---------------------------------------------------------------------------------------------------------------------------------
+
+## Removing rows with NULL values across important columns!
+
+CREATE OR REPLACE TABLE databricks_ws_ccc3f3d0_ea23_4743_b6b9_1c9b2a2c0063.default.airbnb_combined AS
+SELECT
+  *
+FROM 
+   databricks_ws_ccc3f3d0_ea23_4743_b6b9_1c9b2a2c0063.default.airbnb_combined
+WHERE 
+   listing_id IS NOT NULL
+   AND host_id IS NOT NULL
+   AND neighborhood IS NOT NULL
+   AND neighborhood_group IS NOT NULL
+   AND price IS NOT NULL;
+---------------------------------------------------------------------------------------------------------------------------------
+
+## Running some subqueries for furthur analysis
+
+SELECT standardized_neighborhood_group, 
+       total_listings
+FROM (
+  SELECT standardized_neighborhood_group, COUNT(*) AS total_listings
+  FROM databricks_ws_ccc3f3d0_ea23_4743_b6b9_1c9b2a2c0063.default.airbnb_combined
+  GROUP BY standardized_neighborhood_group
+) AS subquery
+WHERE total_listings > 200;
+
+
+SELECT standardized_neighborhood_group, 
+       avg_price_per_night
+FROM (
+  SELECT standardized_neighborhood_group, AVG(price) AS avg_price_per_night
+  FROM databricks_ws_ccc3f3d0_ea23_4743_b6b9_1c9b2a2c0063.default.airbnb_combined
+  GROUP BY standardized_neighborhood_group
+) AS subquery
+WHERE avg_price_per_night > (SELECT AVG(price) FROM databricks_ws_ccc3f3d0_ea23_4743_b6b9_1c9b2a2c0063.default.airbnb_combined);
+
+
+SELECT room_type, 
+       MIN(price) AS min_price, MAX(price) AS max_price, ROUND(AVG(price), 2) AS avg_price
+FROM databricks_ws_08e53cf3_9cc2_484a_9bde_258e8480c292.default.airbnb_combined
+GROUP BY room_type
+ORDER BY avg_price DESC;
+
+
+SELECT standardized_neighborhood_group, 
+       AVG(price) AS avg_price, 
+       AVG(review_rate_number) AS avg_review_rate
+FROM databricks_ws_08e53cf3_9cc2_484a_9bde_258e8480c292.default.airbnb_combined
+GROUP BY standardized_neighborhood_group
+ORDER BY avg_price DESC;
+
+
+SELECT standardized_neighborhood_group, 
+       COUNT(*) AS number_listings
+FROM databricks_ws_08e53cf3_9cc2_484a_9bde_258e8480c292.default.airbnb_combined
+GROUP BY standardized_neighborhood_group
+HAVING number_listings > 100
+ORDER BY number_listings DESC;
+---------------------------------------------------------------------------------------------------------------------------------
+
+## Window functions to find the top 5 ranked prices across each neighborhood!
+
+SELECT *
+FROM (
+  SELECT standardized_neighborhood_group, 
+         listing_id, 
+         price, 
+         RANK() OVER(PARTITION BY standardized_neighborhood_group ORDER BY price DESC) AS ranked_price
+         AVG(price) OVER(PARTITION BY standardized_neighborhood_group) AS avg_price,
+         price-AVG(price) OVER(PARTITION BY standardized_neighborhood_group) AS diff_price
+  FROM databricks_ws_11d604df_b599_4e17_8cb3_1b90211bf278.default.airbnb_combined
+  GROUP BY standardized_neighborhood_group, listing_id, price
+) AS subquery
+WHERE ranked_price <= 5;
+---------------------------------------------------------------------------------------------------------------------------------
+
+## Feature Engineering
+
+-- New feature: price_to_review_ratio as division of price by number_of_reviews
+SELECT listing_id,
+       price,
+       number_of_reviews,
+       CASE 
+         WHEN number_of_reviews > 0 THEN ROUND(price / number_of_reviews,2) ELSE NULL 
+         END AS price_to_review_ratio
+FROM databricks_ws_1485be00_cd02_4c1f_b93d_070892896c0f.default.airbnb_combined;
+
+-- New feature: host_density as the number of unique listing_ids per host_id
+SELECT host_id,
+       host_name,
+       COUNT(DISTINCT listing_id) AS host_density
+FROM databricks_ws_1485be00_cd02_4c1f_b93d_070892896c0f.default.airbnb_combined
+GROUP BY host_id, host_name
+ORDER BY host_density DESC;
+
+-- New feature: availability_score by dividing availability_365 by 365
+SELECT listing_id,
+       availability_365,
+       availability_365 / 365.0 AS availability_score
+FROM databricks_ws_1485be00_cd02_4c1f_b93d_070892896c0f.default.airbnb_combined;
+---------------------------------------------------------------------------------------------------------------------------------
+
+## Summary Statistics
+
+SELECT standardized_neighborhood_group,
+       MIN(price) AS min_price,
+       MAX(price) AS max_price,
+       ROUND(AVG(price),2) AS avg_price,
+       Median(price) AS median_price
+FROM databricks_ws_1485be00_cd02_4c1f_b93d_070892896c0f.default.airbnb_combined
+GROUP BY standardized_neighborhood_group;
+
+SELECT standardized_neighborhood_group,
+       SUM(availability_365) AS total_availability,
+       AVG(service_fee) AS avg_service_fee,
+       SUM(service_fee) AS total_service_fee_revenue
+FROM databricks_ws_1485be00_cd02_4c1f_b93d_070892896c0f.default.airbnb_combined
+GROUP BY standardized_neighborhood_group
+ORDER BY standardized_neighborhood_group;
+
+SELECT standardized_neighborhood_group,
+       room_type,
+       SUM(number_of_reviews) AS total_reviews,
+       AVG(reviews_per_month) AS avg_reviews_per_month,
+       MEDIAN(review_rate_number) AS median_review_rate
+FROM databricks_ws_1485be00_cd02_4c1f_b93d_070892896c0f.default.airbnb_combined
+GROUP BY standardized_neighborhood_group, room_type;
+---------------------------------------------------------------------------------------------------------------------------------
+
+## Data Driven Recommendations
+
+-- Calculate the total revenue (total_earnings) generated by each standardized_neighborhood_group
+SELECT standardized_neighborhood_group,
+       ROUND(SUM(price*reviews_per_month*number_of_reviews),2) AS total_earnings
+FROM databricks_ws_1485be00_cd02_4c1f_b93d_070892896c0f.default.airbnb_combined
+WHERE reviews_per_month IS NOT NULL
+GROUP BY standardized_neighborhood_group
+ORDER BY total_earnings DESC;
+
+-- Determine the most popular room_type in each standardized_neighborhood_group based on total_reviews
+SELECT standardized_neighborhood_group,
+       room_type,
+       SUM(number_of_reviews) AS total_reviews
+FROM databricks_ws_1485be00_cd02_4c1f_b93d_070892896c0f.default.airbnb_combined
+GROUP BY standardized_neighborhood_group, room_type
+ORDER BY standardized_neighborhood_group, total_reviews DESC;
+
+-- Hosts with more than 5 listings and calculate their average availability_365 and average review_rate_number
+SELECT host_id,
+       calculated_host_listings_count,
+       AVG(availability_365) AS avg_availability,
+       ROUND(AVG(review_rate_number),0) AS avg_review_rate
+FROM databricks_ws_1485be00_cd02_4c1f_b93d_070892896c0f.default.airbnb_combined
+WHERE calculated_host_listings_count > 5
+GROUP BY host_id, calculated_host_listings_count;
+
