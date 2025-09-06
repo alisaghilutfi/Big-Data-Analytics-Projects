@@ -59,6 +59,8 @@ This Excel project analyzes customer churn patterns using real-world telecom dat
 
 `Monthly Charges:` Average monthly billing amount
 
+![Columns](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/Customer-Churn-Analysis-in-Excel/images/Columns.PNG)
+
 
 ## 🔍 Key Insights Discovered
 ### Top Churn Drivers
