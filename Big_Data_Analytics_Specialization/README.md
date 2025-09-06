@@ -19,6 +19,8 @@ The specialization is composed of six main courses, each with hands-on projects 
 
 The image below provides a visual overview of the courses within this specialization.
 
+![Courses](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/Big_Data_Analytics_Specialization/Courses.PNG)
+
 
 ## 🎯 Project Highlights
 - `Predictive Modeling:` Projects focused on developing and evaluating models to forecast outcomes.
