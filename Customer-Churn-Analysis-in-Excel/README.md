@@ -97,6 +97,7 @@ The Excel solution includes comprehensive analysis across three stages:
 - Demographic insights presentation
 - Data consumption pattern analysis
 
+![Dashboard](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/Customer-Churn-Analysis-in-Excel/images/Dashboard.PNG)
 
 ## 🛠️ Technical Implementation
 ### Tools & Technologies
