@@ -1,8 +1,8 @@
 
-# 🎯 Customer Segmentation with PySpark
+# Customer Segmentation with PySpark
 This project addresses a key challenge for e-commerce companies: uncertainty in supply chain planning. By analyzing customer purchasing behavior, this project helps the `Sales & Operations Planning (S&OP)` team at a multinational e-commerce company prepare for end-of-year sales. The insights gained from customer segmentation can be used to plan promotional opportunities, manage inventory, and ensure customer satisfaction.
 
-# Methodology
+# 🎯 Methodology
 This solution uses `RFM (Recency, Frequency, Monetary)` analysis to transform raw transactional data into meaningful features. These features are then used to segment customers into distinct groups using the `K-Means clustering` algorithm. The entire process is built using `PySpark`, which is optimized for large-scale data processing.
 
 The steps are as follows:
