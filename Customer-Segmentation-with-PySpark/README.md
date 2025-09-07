@@ -17,7 +17,7 @@ The steps are as follows:
 
 - `Segment Interpretation:` Analyze the characteristics of each cluster to understand the customer segments.
 
-# Data
+# 📊 Data
 The analysis is based on the `Online Retail.csv` dataset. The key columns used for the analysis are summarized below:
 
 ![Features](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/Customer-Segmentation-with-PySpark/Features.PNG)
