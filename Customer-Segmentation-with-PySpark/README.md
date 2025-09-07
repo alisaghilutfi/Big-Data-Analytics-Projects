@@ -20,41 +20,7 @@ The steps are as follows:
 # Data
 The analysis is based on the `Online Retail.csv` dataset. The key columns used for the analysis are summarized below:
 
-Column
-
-Description
-
-InvoiceNo
-
-A 6-digit number uniquely assigned to each transaction.
-
-StockCode
-
-A 5-digit number uniquely assigned to each distinct product.
-
-Description
-
-The product name.
-
-Quantity
-
-The quantity of each product per transaction.
-
-UnitPrice
-
-The product price per unit.
-
-CustomerID
-
-A 5-digit number uniquely assigned to each customer.
-
-Country
-
-The country where the customer resides.
-
-InvoiceDate
-
-The date and time when the transaction was generated.
+![Features](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/Customer-Segmentation-with-PySpark/Features.PNG)
 
 # Key Findings: Customer Segments
 The analysis identified `five distinct customer segments` with the following characteristics and business implications:
