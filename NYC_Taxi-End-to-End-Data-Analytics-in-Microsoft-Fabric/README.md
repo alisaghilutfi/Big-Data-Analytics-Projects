@@ -20,55 +20,9 @@ This Microsoft Fabric project delivers a comprehensive end-to-end data analytics
 - How do various rate codes (Standard, JFK, Newark) impact revenue distribution?
 
 
-## 📋 Dataset Information
-`Source:` NYC Taxi and Limousine Commission (TLC) Trip Record Data
-
-`Population:` Yellow taxi trips across New York City
-
-`Time Period:` January 2024 - December 2024 (12 months)
-
-`Records:` 6,892,400 total trips analyzed
-
-`Structure:` Two primary datasets - Yellow taxi trip records with 21+ fields connected to taxi zone lookup reference data with 265 locations
-
-`Scope:` Each trip record represents one complete taxi journey from pickup to dropoff with comprehensive fare and operational details
-
-### Key Performance Indicators (KPIs)
-| Metric | Value | Description |
-|----------|----------|----------|
-| Total Trips | 6,892,400 | Complete taxi journeys recorded |
-| Total Passengers | 6,574,176 | Aggregate passenger count |
-| Total Revenue | $180.41M | Cumulative fare revenue generated |
-| Average Trip Distance | ~3.2 miles | Mean distance per trip |
-| Primary Pickup Borough | Manhattan | Highest volume origin zone |
-
-
 ## 📈 Key Data Attributes
-`tpep_pickup_datetime:` Timestamp when meter engaged (trip start)
 
-`tpep_dropoff_datetime:` Timestamp when meter disengaged (trip end)
-
-`VendorID:` Technology provider (1=Creative Mobile Technologies, 2=Curb Mobility, 6=Myle Technologies, 7=Helix)
-
-`PULocationID/DOLocationID:` TLC Taxi Zone identifiers for pickup and dropoff locations
-
-`passenger_count:` Number of passengers in vehicle
-
-`trip_distance:` Metered distance traveled in miles
-
-`RatecodeID:` Fare structure (Standard, JFK, Newark, Nassau/Westchester, Negotiated, Group ride)
-
-`payment_type:` Payment method (Credit card, Cash, No charge, Dispute, etc.)
-
-`fare_amount:` Time-and-distance fare calculated by meter
-
-`total_amount:` Complete charge including tips, tolls, surcharges, and fees
-
-`tip_amount:` Gratuity (automatically populated for credit card transactions)
-
-`congestion_surcharge:` NYS congestion zone charges
-
-`cbd_congestion_fee:` MTA Congestion Relief Zone fee (introduced January 5, 2025)
+![Features](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/NYC_Taxi-End-to-End-Data-Analytics-in-Microsoft-Fabric/Images/Features.PNG)
 
 
 ## 🔍 Key Insights Discovered
