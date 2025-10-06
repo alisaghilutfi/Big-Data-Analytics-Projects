@@ -70,29 +70,16 @@ The Microsoft Fabric solution implements a complete medallion architecture:
 
 ## 📊 Power BI Dashboard
 The interactive reporting solution provides comprehensive analytics:
-
-![PowerBI dashboard](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/NYC_Taxi-End-to-End-Data-Analytics-in-Microsoft-Fabric/Images/05_2.PNG)
-
 ### Executive Overview
 - **KPI Cards:**
-  - Number of Passengers: 6.57M
-  - Number of Trips: 6.89M
-  - Total Revenue: $180.41M
+  - `Number of Passengers`
+  - `Number of Trips`
+  - `Total Revenue`
 - **Date Range Slicer:** Interactive filtering (1/18/2024 - 2/3/2024 shown)
 - **Payment Method Filter:** Cash, Credit Card, Dispute, Flex Fare Trip, No Charge
 - **Vendor Selection:** Creative Mobile Technologies, Curb Mobility, Myle Technologies
 
-### Revenue Analytics
-- **Daily Revenue by Date and Payment Method:** Stacked bar chart showing cash vs credit card trends
-- **Temporal Analysis:** Daily granularity from Jan 18 to Feb 3
-- **Payment Mix Visualization:** Color-coded by payment type for easy pattern identification
-- **Trend Identification:** Clear visibility of daily fluctuations and patterns
-
-### Geographic Analysis
-- **Pickup/Dropoff Matrix:** Detailed table showing borough and zone combinations
-- **Trip Volume Breakdown:** Number of trips by pickup zone and dropoff zone pairs
-- **Top Routes:** Manhattan to Manhattan routes dominate (Upper East Side, Midtown)
-- **Borough Distribution:** Clear visibility of inter-borough travel patterns
+![PowerBI dashboard](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/NYC_Taxi-End-to-End-Data-Analytics-in-Microsoft-Fabric/Images/05_2.PNG)
 
 
 ## 🛠️ Technical Implementation
@@ -105,49 +92,6 @@ The interactive reporting solution provides comprehensive analytics:
 - **Orchestration:** Fabric pipelines with stored procedures
 - **Visualization:** Power BI integrated reporting
 - **Data Format:** Parquet (compressed columnar storage)
-
-### Fabric Workloads Used
-**Lakehouse:**
-- Scalable data lake storage
-- ACID transaction support
-- Direct SQL query capabilities
-
-**Data Pipeline:**
-- Visual ETL/ELT orchestration
-- Parameterized execution
-- Activity monitoring and logging
-
-**Dataflow Gen2:**
-- Power Query transformation at scale
-- Data quality and cleansing operations
-- Column removal and renaming logic
-
-**SQL Analytics Endpoint:**
-- T-SQL query interface
-- Automatic table generation
-- Integration with semantic models
-
-**Power BI:**
-- Native Fabric integration
-- Direct Lake mode for performance
-- Interactive filtering and drill-through
-
-### Data Quality Measures
-**Outlier Removal:**
-- Stored procedure sp_removing_outlier_tripdata
-- Statistical validation of trip metrics
-- Automated data cleansing workflows
-
-**Metadata Management:**
-- sp_loading_staging_metadata for lineage tracking
-- Processing timestamps and row counts
-- Data quality monitoring
-
-**Transformation Steps:**
-- 20 applied steps in main dataflow
-- 5 steps in lookup processing
-- Renamed columns for clarity (payment_method, passenger_count)
-- Removed unnecessary columns (do_location_id)
 
 
 ## 📈 Data Processing Flow
