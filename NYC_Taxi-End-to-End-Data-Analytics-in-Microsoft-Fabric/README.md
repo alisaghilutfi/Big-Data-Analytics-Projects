@@ -71,6 +71,8 @@ The Microsoft Fabric solution implements a complete medallion architecture:
 ## 📊 Power BI Dashboard
 The interactive reporting solution provides comprehensive analytics:
 
+![PowerBI dashboard](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/NYC_Taxi-End-to-End-Data-Analytics-in-Microsoft-Fabric/Images/05_2.PNG)
+
 ### Executive Overview
 - **KPI Cards:**
   - Number of Passengers: 6.57M
