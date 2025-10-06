@@ -25,25 +25,6 @@ This Microsoft Fabric project delivers a comprehensive end-to-end data analytics
 ![Features](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/NYC_Taxi-End-to-End-Data-Analytics-in-Microsoft-Fabric/Images/Features.PNG)
 
 
-## 🔍 Key Insights Discovered
-### Revenue & Payment Analysis
-- **Credit Card Dominance** - Primary payment method accounting for majority of transactions
-- **Daily Revenue Patterns** - Consistent revenue streams with peaks during weekday commute periods
-- **Payment Method Impact** - Credit card trips show higher average tips compared to cash payments
-- **Temporal Trends** - Strong correlation between date ranges and revenue fluctuations
-
-### Geographic Intelligence
-- **Manhattan Concentration** - Highest trip density in core Manhattan zones (Upper East Side, Midtown)
-- **Airport Routes** - Significant volume to/from JFK and LaGuardia airports
-- **Borough Distribution** - Manhattan-to-Manhattan trips dominate overall volume
-- **Zone Performance** - Upper East Side North, Midtown Center show highest trip counts
-
-### Operational Metrics
-- **Vendor Performance** - Curb Mobility, LLC shows strong market presence
-- **Trip Efficiency** - Average trip duration and distance metrics within expected ranges
-- **Peak Periods** - Higher trip volumes during evening hours and weekday rush periods
-
-
 ## 🏗️ Architecture Components
 The Microsoft Fabric solution implements a complete medallion architecture:
 
