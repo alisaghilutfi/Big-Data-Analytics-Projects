@@ -2,7 +2,7 @@
 # Customer Segmentation with PySpark
 This project addresses a key challenge for e-commerce companies: uncertainty in supply chain planning. By analyzing customer purchasing behavior, this project helps the `Sales & Operations Planning (S&OP)` team at a multinational e-commerce company prepare for end-of-year sales. The insights gained from customer segmentation can be used to plan promotional opportunities, manage inventory, and ensure customer satisfaction.
 
-# Methodology
+# 🎯 Methodology
 This solution uses `RFM (Recency, Frequency, Monetary)` analysis to transform raw transactional data into meaningful features. These features are then used to segment customers into distinct groups using the `K-Means clustering` algorithm. The entire process is built using `PySpark`, which is optimized for large-scale data processing.
 
 The steps are as follows:
@@ -17,44 +17,10 @@ The steps are as follows:
 
 - `Segment Interpretation:` Analyze the characteristics of each cluster to understand the customer segments.
 
-# Data
+# 📊 Data
 The analysis is based on the `Online Retail.csv` dataset. The key columns used for the analysis are summarized below:
 
-Column
-
-Description
-
-InvoiceNo
-
-A 6-digit number uniquely assigned to each transaction.
-
-StockCode
-
-A 5-digit number uniquely assigned to each distinct product.
-
-Description
-
-The product name.
-
-Quantity
-
-The quantity of each product per transaction.
-
-UnitPrice
-
-The product price per unit.
-
-CustomerID
-
-A 5-digit number uniquely assigned to each customer.
-
-Country
-
-The country where the customer resides.
-
-InvoiceDate
-
-The date and time when the transaction was generated.
+![Features](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/Customer-Segmentation-with-PySpark/Features.PNG)
 
 # Key Findings: Customer Segments
 The analysis identified `five distinct customer segments` with the following characteristics and business implications:
