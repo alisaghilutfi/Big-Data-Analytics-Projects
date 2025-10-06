@@ -1,0 +1,90 @@
+SELECT COUNT(*) AS count_rows
+FROM stg.taxi_tripdata;
+
+SELECT MIN(tpep_pickup_datetime) AS earliest_date, 
+       MAX(tpep_pickup_datetime) AS latest_date
+FROM dbo.taxi_tripdata;
+
+SELECT YEAR(tpep_pickup_datetime) AS distinct_year,
+       COUNT(DISTINCT MONTH(tpep_pickup_datetime)) AS count_months_per_year 
+FROM stg.taxi_tripdata
+GROUP BY YEAR(tpep_pickup_datetime)
+ORDER BY distinct_year DESC;
+-------------------------------------------------------------------------------------
+
+-- Removing all outliers through a repeatable process!
+CREATE PROCEDURE stg.data_cleaning_stg
+@end_date DATETIME2,
+@start_date DATETIME2
+AS
+DELETE FROM stg.taxi_tripdata
+WHERE tpep_dropoff_datetime < @start_date
+      OR tpep_dropoff_datetime > @end_date;
+-------------------------------------------------------------------------------------
+
+SELECT 'placeholder' AS pipeline_run_id,
+       'stg_taxi_tripdata' AS prosessed_table,
+       COUNT(*) AS processed_rows,
+       MAX(tpep_pickup_datetime) AS processed_latest_pickup,
+       CURRENT_TIMESTAMP AS processed_datetime
+FROM stg.taxi_tripdata;
+
+CREATE SCHEMA metadata;
+
+CREATE TABLE metadata.processing_logs
+(
+  pipeline_run_id VARCHAR(255),
+  processed_table VARCHAR(255),
+  processed_rows INT,
+  processed_latest_pickup DATETIME2(6),
+  processed_datetime DATETIME2(6) 
+);
+-------------------------------------------------------------------------------------
+
+CREATE TABLE dbo.taxi_tripdata
+(
+   vendor VARCHAR(50),
+   tpep_pickup_datetime DATE,
+   tpep_dropoff_datetime DATE,
+   pu_borough VARCHAR(100),
+   pu_zone VARCHAR(100),
+   do_borough VARCHAR(100),
+   do_zone VARCHAR(100),
+   payment_method VARCHAR(50),
+   passenger_count INT,
+   trip_distance FLOAT,
+   total_amount FLOAT
+);
+-------------------------------------------------------------------------------------
+
+-- CREATE PROCEDURE metadata.insert_metadata_stg
+
+EXEC sp_rename 'metadata.processing_logs.prosessed_table', 'processed_table', 'COLUMN';
+GO
+
+ALTER PROCEDURE metadata.insert_metadata_stg
+    @pipeline_run_id VARCHAR(255),
+    @table_name VARCHAR(255),
+    @processed_date DATETIME2
+AS
+INSERT INTO metadata.processing_logs(pipeline_run_id, processed_table, processed_rows, processed_latest_pickup, processed_datetime)
+SELECT @pipeline_run_id AS pipeline_run_id,
+       @table_name AS processed_table,
+       COUNT(*) AS processed_rows,
+       MAX(tpep_pickup_datetime) AS processed_latest_pickup,
+       @processed_date AS processed_datetime
+FROM stg.taxi_tripdata;
+-------------------------------------------------------------------------------------
+
+CREATE PROCEDURE metadata.insert_metadata_pres
+    @pipeline_run_id VARCHAR(255),
+    @table_name VARCHAR(255),
+    @processed_date DATETIME2
+AS
+INSERT INTO metadata.processing_logs(pipeline_run_id, processed_table, processed_rows, processed_latest_pickup, processed_datetime)
+SELECT @pipeline_run_id AS pipeline_run_id,
+       @table_name AS processed_table,
+       COUNT(*) AS processed_rows,
+       MAX(tpep_pickup_datetime) AS processed_latest_pickup,
+       @processed_date AS processed_datetime
+FROM dbo.taxi_tripdata;
