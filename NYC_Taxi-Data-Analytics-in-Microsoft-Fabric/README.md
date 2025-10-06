@@ -20,78 +20,15 @@ This Microsoft Fabric project delivers a comprehensive end-to-end data analytics
 - How do various rate codes (Standard, JFK, Newark) impact revenue distribution?
 
 
-## 📋 Dataset Information
-`Source:` NYC Taxi and Limousine Commission (TLC) Trip Record Data
-
-`Population:` Yellow taxi trips across New York City
-
-`Time Period:` January 2024 - December 2024 (12 months)
-
-`Records:` 6,892,400 total trips analyzed
-
-`Structure:` Two primary datasets - Yellow taxi trip records with 21+ fields connected to taxi zone lookup reference data with 265 locations
-
-`Scope:` Each trip record represents one complete taxi journey from pickup to dropoff with comprehensive fare and operational details
-
-### Key Performance Indicators (KPIs)
-| Metric | Value | Description |
-|----------|----------|----------|
-| Total Trips | 6,892,400 | Complete taxi journeys recorded |
-| Total Passengers | 6,574,176 | Aggregate passenger count |
-| Total Revenue | $180.41M | Cumulative fare revenue generated |
-| Average Trip Distance | ~3.2 miles | Mean distance per trip |
-| Primary Pickup Borough | Manhattan | Highest volume origin zone |
-
-
 ## 📈 Key Data Attributes
-`tpep_pickup_datetime:` Timestamp when meter engaged (trip start)
 
-`tpep_dropoff_datetime:` Timestamp when meter disengaged (trip end)
-
-`VendorID:` Technology provider (1=Creative Mobile Technologies, 2=Curb Mobility, 6=Myle Technologies, 7=Helix)
-
-`PULocationID/DOLocationID:` TLC Taxi Zone identifiers for pickup and dropoff locations
-
-`passenger_count:` Number of passengers in vehicle
-
-`trip_distance:` Metered distance traveled in miles
-
-`RatecodeID:` Fare structure (Standard, JFK, Newark, Nassau/Westchester, Negotiated, Group ride)
-
-`payment_type:` Payment method (Credit card, Cash, No charge, Dispute, etc.)
-
-`fare_amount:` Time-and-distance fare calculated by meter
-
-`total_amount:` Complete charge including tips, tolls, surcharges, and fees
-
-`tip_amount:` Gratuity (automatically populated for credit card transactions)
-
-`congestion_surcharge:` NYS congestion zone charges
-
-`cbd_congestion_fee:` MTA Congestion Relief Zone fee (introduced January 5, 2025)
-
-
-## 🔍 Key Insights Discovered
-### Revenue & Payment Analysis
-- **Credit Card Dominance** - Primary payment method accounting for majority of transactions
-- **Daily Revenue Patterns** - Consistent revenue streams with peaks during weekday commute periods
-- **Payment Method Impact** - Credit card trips show higher average tips compared to cash payments
-- **Temporal Trends** - Strong correlation between date ranges and revenue fluctuations
-
-### Geographic Intelligence
-- **Manhattan Concentration** - Highest trip density in core Manhattan zones (Upper East Side, Midtown)
-- **Airport Routes** - Significant volume to/from JFK and LaGuardia airports
-- **Borough Distribution** - Manhattan-to-Manhattan trips dominate overall volume
-- **Zone Performance** - Upper East Side North, Midtown Center show highest trip counts
-
-### Operational Metrics
-- **Vendor Performance** - Curb Mobility, LLC shows strong market presence
-- **Trip Efficiency** - Average trip duration and distance metrics within expected ranges
-- **Peak Periods** - Higher trip volumes during evening hours and weekday rush periods
+![Features](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/NYC_Taxi-End-to-End-Data-Analytics-in-Microsoft-Fabric/Images/Features.PNG)
 
 
 ## 🏗️ Architecture Components
 The Microsoft Fabric solution implements a complete medallion architecture:
+
+![Main Root Project](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/NYC_Taxi-End-to-End-Data-Analytics-in-Microsoft-Fabric/Images/01.PNG)
 
 ### Data Ingestion Layer (Bronze)
 - **Lakehouse Storage:** Project_Lakehouse with structured file organization
@@ -133,27 +70,16 @@ The Microsoft Fabric solution implements a complete medallion architecture:
 
 ## 📊 Power BI Dashboard
 The interactive reporting solution provides comprehensive analytics:
-
 ### Executive Overview
 - **KPI Cards:**
-  - Number of Passengers: 6.57M
-  - Number of Trips: 6.89M
-  - Total Revenue: $180.41M
+  - `Number of Passengers`
+  - `Number of Trips`
+  - `Total Revenue`
 - **Date Range Slicer:** Interactive filtering (1/18/2024 - 2/3/2024 shown)
 - **Payment Method Filter:** Cash, Credit Card, Dispute, Flex Fare Trip, No Charge
 - **Vendor Selection:** Creative Mobile Technologies, Curb Mobility, Myle Technologies
 
-### Revenue Analytics
-- **Daily Revenue by Date and Payment Method:** Stacked bar chart showing cash vs credit card trends
-- **Temporal Analysis:** Daily granularity from Jan 18 to Feb 3
-- **Payment Mix Visualization:** Color-coded by payment type for easy pattern identification
-- **Trend Identification:** Clear visibility of daily fluctuations and patterns
-
-### Geographic Analysis
-- **Pickup/Dropoff Matrix:** Detailed table showing borough and zone combinations
-- **Trip Volume Breakdown:** Number of trips by pickup zone and dropoff zone pairs
-- **Top Routes:** Manhattan to Manhattan routes dominate (Upper East Side, Midtown)
-- **Borough Distribution:** Clear visibility of inter-borough travel patterns
+![PowerBI dashboard](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/NYC_Taxi-End-to-End-Data-Analytics-in-Microsoft-Fabric/Images/05_2.PNG)
 
 
 ## 🛠️ Technical Implementation
@@ -166,49 +92,6 @@ The interactive reporting solution provides comprehensive analytics:
 - **Orchestration:** Fabric pipelines with stored procedures
 - **Visualization:** Power BI integrated reporting
 - **Data Format:** Parquet (compressed columnar storage)
-
-### Fabric Workloads Used
-**Lakehouse:**
-- Scalable data lake storage
-- ACID transaction support
-- Direct SQL query capabilities
-
-**Data Pipeline:**
-- Visual ETL/ELT orchestration
-- Parameterized execution
-- Activity monitoring and logging
-
-**Dataflow Gen2:**
-- Power Query transformation at scale
-- Data quality and cleansing operations
-- Column removal and renaming logic
-
-**SQL Analytics Endpoint:**
-- T-SQL query interface
-- Automatic table generation
-- Integration with semantic models
-
-**Power BI:**
-- Native Fabric integration
-- Direct Lake mode for performance
-- Interactive filtering and drill-through
-
-### Data Quality Measures
-**Outlier Removal:**
-- Stored procedure sp_removing_outlier_tripdata
-- Statistical validation of trip metrics
-- Automated data cleansing workflows
-
-**Metadata Management:**
-- sp_loading_staging_metadata for lineage tracking
-- Processing timestamps and row counts
-- Data quality monitoring
-
-**Transformation Steps:**
-- 20 applied steps in main dataflow
-- 5 steps in lookup processing
-- Renamed columns for clarity (payment_method, passenger_count)
-- Removed unnecessary columns (do_location_id)
 
 
 ## 📈 Data Processing Flow
