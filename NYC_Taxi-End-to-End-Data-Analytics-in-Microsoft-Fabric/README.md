@@ -28,6 +28,8 @@ This Microsoft Fabric project delivers a comprehensive end-to-end data analytics
 ## 🏗️ Architecture Components
 The Microsoft Fabric solution implements a complete medallion architecture:
 
+![Main Root Project](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/NYC_Taxi-End-to-End-Data-Analytics-in-Microsoft-Fabric/Images/01.PNG)
+
 ### Data Ingestion Layer (Bronze)
 - **Lakehouse Storage:** Project_Lakehouse with structured file organization
 - **Raw Data Files:** 12 monthly parquet files (yellow_tripdata_2024-01 through 2024-12)
