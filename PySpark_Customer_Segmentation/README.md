@@ -20,7 +20,7 @@ The steps are as follows:
 # 📊 Data
 The analysis is based on the `Online Retail.csv` dataset. The key columns used for the analysis are summarized below:
 
-![Features](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/Customer-Segmentation-with-PySpark/Features.PNG)
+![Features](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/main/PySpark_Customer_Segmentation/Features.PNG)
 
 # Key Findings: Customer Segments
 The analysis identified `five distinct customer segments` with the following characteristics and business implications:
