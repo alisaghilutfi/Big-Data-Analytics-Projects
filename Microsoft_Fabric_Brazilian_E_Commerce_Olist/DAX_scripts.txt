@@ -1,0 +1,21 @@
+# Three basic/important KPIs
+Total_Revenue = SUM(Fact_Sales[total_order_value])
+
+Total_Orders = DISTINCTCOUNT(Fact_Sales[order_id])
+
+Average_Order_Value = DIVIDE([Total Revenue], [Total Orders], 0)
+
+
+# Last Month Revenue
+Revenue_LM = CALCULATE([Total_Revenue], DATEADD('Dim_Date'[FullDate], -1, MONTH))
+
+
+# Month over Month Growth
+Revenue_MoM% = 
+VAR _LM = [Revenue_LM]
+RETURN
+DIVIDE([Total_Revenue] - _LM, _LM, 0)
+
+
+# Active Customer
+Active_Customers = DISTINCTCOUNT(Agg_Customer_Intelligence[customer_unique_id])
