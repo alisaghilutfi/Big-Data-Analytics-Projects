@@ -79,7 +79,7 @@ The interactive reporting solution provides comprehensive analytics:
 - **Payment Method Filter:** Cash, Credit Card, Dispute, Flex Fare Trip, No Charge
 - **Vendor Selection:** Creative Mobile Technologies, Curb Mobility, Myle Technologies
 
-![PowerBI dashboard](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/NYC_Taxi-End-to-End-Data-Analytics-in-Microsoft-Fabric/Images/05_2.PNG)
+![PowerBI dashboard](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/main/Microsoft_Fabric_NycTaxi_Data_Analysis/Images/05_2.PNG)
 
 
 ## 🛠️ Technical Implementation
