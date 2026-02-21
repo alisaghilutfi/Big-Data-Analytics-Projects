@@ -22,7 +22,7 @@ This Microsoft Fabric project delivers a comprehensive end-to-end data analytics
 
 ## 📈 Key Data Attributes
 
-![Features](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/master/NYC_Taxi-End-to-End-Data-Analytics-in-Microsoft-Fabric/Images/Features.PNG)
+![Features](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/main/Microsoft_Fabric_NycTaxi_Data_Analysis/Images/Features.PNG)
 
 
 ## 🏗️ Architecture Components
