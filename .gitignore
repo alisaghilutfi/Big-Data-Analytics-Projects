@@ -1,0 +1,23 @@
+# Data files (too large to track in git)
+*.parquet
+*.csv
+*.pbix
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.eggs/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.spyproject/
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
