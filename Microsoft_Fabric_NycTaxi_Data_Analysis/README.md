@@ -22,13 +22,13 @@ This Microsoft Fabric project delivers a comprehensive end-to-end data analytics
 
 ## 📈 Key Data Attributes
 
-![Features](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/main/Microsoft_Fabric_NycTaxi_Data_Analysis/Images/Features.PNG)
+![Features](Images/Features.PNG)
 
 
 ## 🏗️ Architecture Components
 The Microsoft Fabric solution implements a complete medallion architecture:
 
-![Main Root Project](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/main/Microsoft_Fabric_NycTaxi_Data_Analysis/Images/03_2.PNG)
+![Main Root Project](Images/03_2.PNG)
 
 ### Data Ingestion Layer (Bronze)
 - **Lakehouse Storage:** Project_Lakehouse with structured file organization
@@ -79,7 +79,7 @@ The interactive reporting solution provides comprehensive analytics:
 - **Payment Method Filter:** Cash, Credit Card, Dispute, Flex Fare Trip, No Charge
 - **Vendor Selection:** Creative Mobile Technologies, Curb Mobility, Myle Technologies
 
-![PowerBI dashboard](https://github.com/alisaghilutfi/Big-Data-Analytics-Projects/blob/main/Microsoft_Fabric_NycTaxi_Data_Analysis/Images/05_2.PNG)
+![PowerBI dashboard](Images/05_2.PNG)
 
 
 ## 🛠️ Technical Implementation
