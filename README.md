@@ -24,25 +24,3 @@ The projects in this repository highlight expertise in the following areas:
 **Platforms & Tools:** Microsoft Fabric, Databricks, Azure Service Bus, Power BI, Git
 
 **Concepts:** Data Cleaning, ETL, Medallion Architecture, Real-Time Streaming, Feature Engineering, Machine Learning, Visual Analytics, Business Intelligence
-
----
-
-## Project Previews
-
-**Databricks Airbnb Data Analysis**
-![Airbnb Dashboard](Databricks_Airbnb_Data_Analysis/images/05_dashboard.PNG)
-
-**Microsoft Fabric NYC Taxi**
-![NYC Taxi Dashboard](Microsoft_Fabric_NycTaxi_Data_Analysis/Images/05_1.PNG)
-
-**Microsoft Fabric Brazilian E-Commerce Olist**
-![Olist Power BI Report](Microsoft_Fabric_Brazilian_E_Commerce_Olist/Iamges/PowerBI_Report.png)
-
-**Microsoft Fabric RTI Crypto Prices**
-![RTI Dashboard](Microsoft_Fabric_RTI_Crypto_Prices/Images/RTI_Dashboard_1.png)
-
-**PySpark Customer Segmentation**
-![PySpark Features](PySpark_Customer_Segmentation/Features.PNG)
-
-**Big Data Analytics Specialization**
-![Specialization Courses](Big_Data_Analytics_Specialization/Courses.PNG)
